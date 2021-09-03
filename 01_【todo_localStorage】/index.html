@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>代辦清單</title>
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <div id="app">
+    <div class="wrap" :class="{dark_mode:isdark_mode}">
+      <div class="container">
+        <div class="bg_pic">
+          <div class="desk">
+            <img v-if="isdark_mode" src="images/bg-desktop-dark.jpg" alt="">
+            <img v-else src="images/bg-desktop-light.jpg" alt="">
+
+          </div>
+          <div class="mobile">
+            <img v-if="isdark_mode" src="images/bg-mobile-dark.jpg" alt="">
+            <img v-else src="images/bg-mobile-light.jpg" alt="">
+          </div>
+
+        </div>
+        <div class="main_content">
+          <h1 class="mode clearfix">代辦清單
+            <a href="#" @click="change_mode_handle">
+              <img v-if="isdark_mode" src="images/sun.svg" alt="">
+              <img v-else src="images/icon-moon.svg" alt="">
+            </a>
+          </h1>
+          <div class="list_area">
+            <div class="add_item">
+              <input class="enter_input" type="text" name="" id="" v-model.trim="value_enter">
+              <button class="add_btn" @click="add_item_handle">新增</button>
+            </div>
+            <div class="list_panel">
+              <ul class="list">
+                <li class="list_item" v-for="item in filter_list" :key="item.id">
+                  <input class="check" type="checkbox" name="" id="" @click="change_complete_handle(item.id)"
+                    :checked="item.complete">
+                  <p :class="{complete:item.complete}">{{item.content}}</p>
+                  <a class="delete_btn" href="#" @click='delete_ID_handle(item.id)'><img src="images/icon-cross.svg"
+                      alt=""></a>
+                </li>
+              </ul>
+              <div class="choose_area">
+                <p class="last"><span>{{in_all}}</span>項未完成</p>
+                <a href="#" @click="change_filter_class_handle('all')">全部</a>
+                <a href="#" @click="change_filter_class_handle('active')">進行中</a>
+                <a href="#" @click="change_filter_class_handle('complete')">完成</a>
+                <a href="#" @click="delete_all_complete_handle()">清除完成事項</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.js'
+    integrity='sha512-PyKhbAWS+VlTWXjk/36s5hJmUJBxcGY/1hlxg6woHD/EONP2fawZRKmvHdTGOWPKTqk3CPSUPh7+2boIBklbvw=='
+    crossorigin='anonymous'></script>
+  <script src="script.js"></script>
+</body>
+
+</html>
+
+<!-- https://www.frontendmentor.io/challenges/todo-app-Su1_KokOW -->
+<!-- 所花時間:3小時 -->
