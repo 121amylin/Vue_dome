@@ -1,0 +1,66 @@
+@charset "UTF-8";
+* { margin: 0; padding: 0; -webkit-box-sizing: border-box; box-sizing: border-box; }
+
+html, body { font: 62.5%/1 "微軟正黑體", Microsoft JhengHei, Arial, Helvetica, sans-serif; -webkit-text-size-adjust: 100%; -moz-text-size-adjust: 100%; -ms-text-size-adjust: 100%; text-size-adjust: 100%; }
+
+a { color: #000; text-decoration: none; }
+
+#app { min-height: 100vh; background-color: #fafafa; }
+
+select, input { padding: 8px 12px; }
+
+p, a, li, dd { font-size: 1.8rem; }
+
+input, option, select { font-size: 1.6rem; }
+
+.container { width: 100%; max-width: 1280px; padding: 0 20px; margin: auto; }
+
+.header { -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.1); box-shadow: 0 0 3px rgba(0, 0, 0, 0.1); padding: 30px 0; background-color: #fff; }
+
+.header .container { display: -webkit-box; display: -ms-flexbox; display: flex; -ms-flex-pack: distribute; justify-content: space-around; -webkit-box-align: center; -ms-flex-align: center; align-items: center; }
+
+.header .logo { font-size: 2.4rem; font-weight: 700; }
+
+.header .mode { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-align: center; -ms-flex-align: center; align-items: center; }
+
+.header .mode span { margin-left: 6px; font-size: 1.6rem; }
+
+.header .moon { -webkit-transition: opacity 0.3s; transition: opacity 0.3s; }
+
+.header .moon:hover { opacity: 0.6; }
+
+.moon, .moon::after { display: block; -webkit-box-sizing: border-box; box-sizing: border-box; border-radius: 50%; }
+
+.moon { overflow: hidden; position: relative; -webkit-transform: rotate(-135deg) scale(var(--ggs, 1)); transform: rotate(-135deg) scale(var(--ggs, 1)); width: 20px; height: 20px; border: 2px solid; border-bottom-color: transparent; }
+
+.moon::after { content: ""; position: absolute; width: 12px; height: 18px; border: 2px solid transparent; -webkit-box-shadow: 0 0 0 2px; box-shadow: 0 0 0 2px; top: 8px; left: 2px; }
+
+.sun { -webkit-box-sizing: border-box; box-sizing: border-box; position: relative; display: block; -webkit-transform: scale(var(--ggs, 1)); transform: scale(var(--ggs, 1)); width: 24px; height: 24px; background: linear-gradient(to bottom, currentColor 4px, transparent 0) no-repeat 5px -6px/2px 6px, linear-gradient(to bottom, currentColor 4px, transparent 0) no-repeat 5px 14px/2px 6px, linear-gradient(to bottom, currentColor 4px, transparent 0) no-repeat -8px 5px/6px 2px, linear-gradient(to bottom, currentColor 4px, transparent 0) no-repeat 14px 5px/6px 2px; border-radius: 100px; -webkit-box-shadow: inset 0 0 0 2px; box-shadow: inset 0 0 0 2px; border: 6px solid transparent; }
+
+.sun::after, .sun::before { content: ""; display: block; -webkit-box-sizing: border-box; box-sizing: border-box; position: absolute; width: 24px; height: 2px; border-right: 4px solid; border-left: 4px solid; left: -6px; top: 5px; }
+
+.sun::before { -webkit-transform: rotate(-45deg); transform: rotate(-45deg); }
+
+.sun::after { -webkit-transform: rotate(45deg); transform: rotate(45deg); }
+
+.zoom-in { -webkit-box-sizing: border-box; box-sizing: border-box; position: relative; display: block; -webkit-transform: scale(var(--ggs, 1)); transform: scale(var(--ggs, 1)); width: 16px; height: 16px; border: 2px solid; border-radius: 100%; margin-top: -4px; }
+
+.zoom-in::after { content: ""; display: block; -webkit-box-sizing: border-box; box-sizing: border-box; position: absolute; width: 2px; height: 8px; background: currentColor; }
+
+.zoom-in::after { -webkit-transform: rotate(-45deg); transform: rotate(-45deg); border-radius: 3px; top: 10px; left: 12px; }
+
+.dark_mode#app { background-color: #202d36; }
+
+.dark_mode .header { background-color: #2b3743; }
+
+.dark_mode .wrap { background-color: #999; }
+
+.dark_mode a, .dark_mode p { color: #fff; }
+
+.choose_area .container { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-pack: justify; -ms-flex-pack: justify; justify-content: space-between; }
+
+.choose_area .container .search { position: relative; }
+
+.choose_area .container .search .zoom-in { position: absolute; -webkit-transform: translateY(-50%); transform: translateY(-50%); top: 55%; left: 12px; }
+
+.choose_area .container .search input { padding: 8px 12px 8px 32px; }
