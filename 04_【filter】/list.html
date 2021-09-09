@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>list</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style/list.css" />
+</head>
+
+<body>
+  <div id="app">
+    <header id="header">
+      <div class="container flex">
+        <div class="logo">
+          <h1>HaveFun</h1>
+        </div>
+
+        <div class="search_box hide991">
+          <i class="gg-search"></i>
+          <input type="text" />
+        </div>
+      </div>
+    </header>
+    <div class="main">
+      <div class="container flex">
+        <aside id="aside">
+          <div class="item show991">
+            <div class="search_box">
+              <h3>搜尋</h3>
+              <input type="text" />
+            </div>
+          </div>
+
+          <div class="item">
+            <h3>地點</h3>
+            <select>
+              <option value="請選擇地點" disabled>請選擇地點</option>
+              <option value="11">11</option>
+            </select>
+          </div>
+
+          <div class="item">
+            <h3>時間</h3>
+            <div class="time_item">
+              <label for="from">從
+                <input type="date" id="from" />
+              </label>
+            </div>
+
+            <div class="time_item"><label for="to">至
+                <input type="date" id="to" />
+              </label>
+            </div>
+
+
+          </div>
+
+          <div class="item">
+            <h3>地點</h3>
+            <div class="place_item"> <label for="from"><input class="checkbox" type="checkbox" name="all"
+                  id="all" />全部</label></div>
+
+          </div>
+        </aside>
+        <div id="content">
+
+          <div class="pic_list_area">
+            <ul class="list">
+              <li class="item"><a class="flex" href="">
+                  <div class="pic">
+                    <img src="https://previews.123rf.com/images/kho/kho2104/kho210400082/168363470-.jpg" alt="">
+                  </div>
+                  <div class="text">
+
+                    <h2 class="title">test</h2>
+                    <div class="into_des">
+                      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus exercitationem voluptatibus
+                        reiciendis
+                        quos illo odio aliquam nostrum ab facere facilis, officia eius numquam animi assumenda quo
+                        eveniet autem
+                        nam? Eum.</p>
+                    </div>
+                    <h3 class="des"><span>主辦單位：</span>123</h3>
+                    <h3 class="des"><a href="#">活動連結<i class="gg-link"></i></a></h3>
+                    <div class="into_box">
+                      <div class="into_item"><i class="gg-pin"></i>123</div>
+                      <div class="into_item"><i class="gg-calendar-dates"></i>2021-06-03</div>
+                    </div>
+
+                  </div>
+                </a></li>
+            </ul>
+          </div>
+          <div class="pages">
+            <a href="#"><span class="gg-push-chevron-left"></span></a>
+            <a href="#"><span class="prev_arr"></span></a>
+            <a href="#"><span class="num">1</span></a>
+            <a href="#"><span class="next_arr"></span></a>
+            <a href="#"><span class="gg-push-chevron-right"></span></a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.js"
+    integrity="sha512-PyKhbAWS+VlTWXjk/36s5hJmUJBxcGY/1hlxg6woHD/EONP2fawZRKmvHdTGOWPKTqk3CPSUPh7+2boIBklbvw=="
+    crossorigin="anonymous"></script>
+  <script src="script/list.js"></script>
+</body>
+
+</html>

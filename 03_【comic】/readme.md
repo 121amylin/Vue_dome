@@ -1,0 +1,1 @@
+### 如果option沒有設置value的值，會取內容的值當value

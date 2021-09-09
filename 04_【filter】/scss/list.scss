@@ -1,0 +1,110 @@
+@import "base";
+
+.pic_list_area {
+  .list {
+    padding-left: 0;
+    list-style: none;
+  }
+  .item {
+    background-color: #fff;
+    padding: 24px 20px;
+    + .item {
+      margin-top: 24px;
+    }
+  }
+  .pic {
+    width: 28%;
+    @media (max-width: 768px) {
+      width: 100%;
+    }
+    img {
+      display: block;
+      max-width: 200px;
+      margin: auto;
+    }
+  }
+  .text {
+    width: 72%;
+    padding-left: 20px;
+    @media (max-width: 768px) {
+      width: 100%;
+      padding-left: 0;
+    }
+
+    .title {
+      margin-bottom: 16px;
+      font-size: 2.4rem;
+      color: $main-color;
+    }
+    .into_des {
+      margin-bottom: 10px;
+    }
+    .des {
+      margin: 4px 0;
+      font-size: 1.6rem;
+      color: $g_color_1;
+      span {
+        color: #000;
+      }
+      a {
+        color: $main-color;
+        i {
+          display: inline-block;
+          margin-left: 12px;
+          color: $g_color_1;
+          vertical-align: middle;
+        }
+      }
+    }
+    .into_box {
+      display: flex;
+      margin: 12px 0;
+      @media (max-width: 768px) {
+        flex-wrap: wrap;
+      }
+      .into_item {
+        width: 50%;
+        color: $g_color_1;
+        @media (max-width: 768px) {
+          width: 100%;
+          + .into_item {
+            margin-top: 10px;
+          }
+        }
+        i {
+          display: inline-block;
+          margin-right: 8px;
+          color: #000;
+        }
+      }
+    }
+  }
+}
+
+.pages {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 24px;
+  margin-bottom: 40px;
+  @media (max-width: 768px) {
+    justify-content: center;
+  }
+  a {
+    display: flex;
+    width: 42px;
+    height: 42px;
+    background-color: #fff;
+    text-align: center;
+    line-height: 42px;
+    &.active {
+      background-color: $main-color;
+      color: #fff;
+    }
+    + a {
+      margin-left: 4px;
+    }
+    span {
+      margin: auto;
+    }
+  }
+}

@@ -1,0 +1,226 @@
+@import "icon";
+// var
+$main_color: #8a86a9;
+$bg_color: #211e29;
+$text_color: #f26286;
+$panel_dark: #2c2c44;
+$panel_normal: #34364f;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html,
+body {
+  font: 62.5%/1 "微軟正黑體", Roboto, Arial, Helvetica, sans-serif;
+  text-size-adjust: 100%;
+}
+a {
+  text-decoration: none;
+  color: #fff;
+}
+img {
+  width: 100%;
+  vertical-align: middle;
+}
+p,
+li,
+a,
+input,
+label,
+button {
+  font-size: 1.6rem;
+  line-height: 1.75;
+  font-weight: 600;
+  color: #fff;
+}
+
+//common
+.flex {
+  display: flex;
+}
+.ib {
+  display: inline-block !important;
+}
+.icon {
+  vertical-align: middle;
+  margin: 0 14px;
+  transform: scale(1.5);
+}
+.inline_block {
+  display: inline-block !important;
+}
+.ib_icon {
+  vertical-align: -3px;
+  margin-right: 6px;
+}
+// body {
+// }
+#app {
+  min-height: 100vh;
+  padding: 60px 0;
+  background-color: $bg_color;
+  background-image: url(../images/bg-stars.svg), url(../images/pattern-hills.svg);
+  background-position: center, center bottom;
+  background-repeat: no-repeat;
+  background-size: cover, contain;
+  .container {
+    width: 100%;
+    max-width: 1240px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin: auto;
+    padding: 0 20px;
+  }
+}
+.aside {
+  width: calc(40% - 30px);
+  @media (max-width: 991px) {
+    width: 100%;
+  }
+}
+.main {
+  width: 60%;
+  @media (max-width: 991px) {
+    width: 100%;
+  }
+}
+.rwd_table {
+  @media (max-width: 600px) {
+    overflow-x: scroll;
+  }
+}
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  @media (max-width: 600px) {
+    width: 680px;
+  }
+  tbody {
+    tr {
+      border-top: 1px solid #fff;
+    }
+  }
+  th {
+    &:nth-child(1),
+    &:nth-child(3) {
+      width: 20%;
+    }
+    &:nth-child(2) {
+      width: 60%;
+    }
+  }
+  td:nth-child(3) i.gg-trash {
+    margin: auto;
+  }
+  th,
+  td {
+    color: #fff;
+    font-size: 1.8rem;
+    padding: 12px;
+  }
+  th + th,
+  td + td {
+    border-left: 1px solid rgba(255, 255, 255, 0.3);
+  }
+}
+
+.timer_panel {
+  justify-content: space-between;
+  margin: 0 -10px 20px -10px;
+  @media (max-width: 991px) {
+    margin: 0 -20px 40px -20px;
+  }
+  .item {
+    width: 100%;
+    flex-direction: column;
+    position: relative;
+    padding: 0 10px;
+
+    @media (max-width: 991px) {
+      padding: 0 20px;
+    }
+    .box {
+      width: 100%;
+      height: 70px;
+    }
+    .box_top {
+      background-color: $panel_dark;
+      border-top-left-radius: 15px;
+      border-top-right-radius: 15px;
+    }
+    .box_bottom {
+      background-color: $panel_normal;
+      border-bottom-right-radius: 15px;
+      border-bottom-left-radius: 15px;
+    }
+    .circle {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background-color: $bg_color;
+      position: absolute;
+      transform: translateY(-50%);
+      top:calc(50% - 6px) ;
+    }
+    .circle_left {
+      left: 4px;
+      @media (max-width: 991px) {
+        left: 14px;
+      }
+    }
+    .circle_right {
+      right: 4px;
+      @media (max-width: 991px) {
+        right: 14px;
+      }
+    }
+    .num{
+      position: absolute;
+      font-size: 6rem;
+      font-weight: 900;
+      color: $text_color;
+      transform: translate(-50%,-50%);
+      top: 50%;
+      left: 50%;
+    }
+  }
+}
+.add_panel {
+  background-color: $main_color;
+  border-radius: 15px;
+  padding: 20px 30px 30px 30px;
+  @media (max-width: 991px) {
+    margin-bottom: 40px;
+  }
+  .addinput,
+  .submit {
+    width: 100%;
+    padding: 8px 16px;
+    border-radius: 6px;
+    box-shadow: none;
+    border: none;
+  }
+  .addinput {
+    margin-bottom: 10px;
+    color: $bg_color;
+  }
+  .submit {
+    border-bottom: none;
+    background-color: $text_color;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    &:hover {
+      background-color: darken($text_color, 6%);
+    }
+  }
+}
+.choose_time {
+  justify-content: space-between;
+  flex-wrap: wrap;
+  .choose_item {
+    width: 33.3%;
+    padding: 8px;
+  }
+}
