@@ -1,0 +1,51 @@
+//mixin
+@mixin clearfix {
+  &::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+@mixin rwd($size) {
+  @media (max-width: $size) {
+    @content;
+  }
+}
+
+//reset
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+//layout
+#aside {
+  width: 20%;
+  .el-menu {
+    min-height: 100vh;
+    padding-left: 30px;
+    @include rwd(991px) {
+      padding-left: 0px;
+    }
+  }
+}
+#main {
+  width: 80%;
+  padding: 60px 120px 60px 20px;
+  @include rwd(991px) {
+    padding-right: 30px;
+  }
+}
+
+//common
+.flex {
+  display: flex;
+}
+.m_center {
+  margin: auto;
+}
+.t_center {
+  text-align: center;
+}

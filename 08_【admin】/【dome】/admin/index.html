@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>後台_首頁</title>
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+  <link rel="stylesheet" href="/style/admin.css">
+</head>
+
+<body>
+  <div id="admin">
+    <div class="warp flex">
+      <aside id="aside">
+        <el-menu default-active="1" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose"
+          background-color="#545c64" text-color="#fff" active-text-color="#ffd04b">
+
+          <el-menu-item index="1">
+            <span slot="title">导航一</span>
+          </el-menu-item>
+          <el-menu-item index="2">
+            <span slot="title">导航二</span>
+          </el-menu-item>
+          <el-menu-item index="3">
+            <span slot="title">导航三
+            </span>
+          </el-menu-item>
+          <el-menu-item index="4">
+            <span slot="title">导航四</span>
+          </el-menu-item>
+        </el-menu>
+      </aside>
+      <main aria="main" id="main">
+        <div class="panel_box flex">
+          <el-card class="box-card" v-for="i in 4" :key="i">
+            <div v-for="o in 4" :key="o" class="text item">
+              {{'列表内容 ' + o }}
+            </div>
+          </el-card>
+        </div>
+
+      </main>
+    </div>
+  </div>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.js'
+    integrity='sha512-PyKhbAWS+VlTWXjk/36s5hJmUJBxcGY/1hlxg6woHD/EONP2fawZRKmvHdTGOWPKTqk3CPSUPh7+2boIBklbvw=='
+    crossorigin='anonymous'></script>
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  <script src="./script/main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,40 @@
+//mixin
+@mixin clearfix {
+  &::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+@mixin rwd($size) {
+  @media (max-width: $size) {
+    @content;
+  }
+}
+
+//reset
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+//layout
+.container{
+  width: 100%;
+  max-width: 1400px;
+  padding: 20px;
+  margin: auto;
+}
+
+//common
+.flex {
+  display: flex;
+}
+.m_center {
+  margin: auto;
+}
+.t_center {
+  text-align: center;
+}

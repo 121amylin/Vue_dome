@@ -1,0 +1,17 @@
+* { margin: 0; padding: 0; -webkit-box-sizing: border-box; box-sizing: border-box; }
+
+#aside { width: 20%; }
+
+#aside .el-menu { min-height: 100vh; padding-left: 30px; }
+
+@media (max-width: 991px) { #aside .el-menu { padding-left: 0px; } }
+
+#main { width: 80%; padding: 60px 120px 60px 20px; }
+
+@media (max-width: 991px) { #main { padding-right: 30px; } }
+
+.flex { display: -webkit-box; display: -ms-flexbox; display: flex; }
+
+.m_center { margin: auto; }
+
+.t_center { text-align: center; }

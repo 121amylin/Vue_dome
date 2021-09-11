@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>後台_列表頁</title>
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+  <link rel="stylesheet" href="/style/admin.css">
+</head>
+
+<body>
+  <div id="admin">
+    <div class="warp flex">
+      <aside id="aside">
+        <el-menu default-active="1" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose"
+          background-color="#545c64" text-color="#fff" active-text-color="#ffd04b">
+
+          <el-menu-item index="1">
+            <span slot="title">导航一</span>
+          </el-menu-item>
+          <el-menu-item index="2">
+            <span slot="title">导航二</span>
+          </el-menu-item>
+          <el-menu-item index="3">
+            <span slot="title">导航三
+            </span>
+          </el-menu-item>
+          <el-menu-item index="4">
+            <span slot="title">导航四</span>
+          </el-menu-item>
+        </el-menu>
+      </aside>
+      <main aria="main" id="main">
+        <el-row>
+          <el-button type="primary">新增文章</el-button>
+        </el-row>
+        <br>
+        <el-table :data="tableData" border style="width: 100%">
+          <el-table-column fixed prop="date" label="日期" width="150">
+          </el-table-column>
+          <el-table-column prop="name" label="姓名" width="120">
+          </el-table-column>
+          <el-table-column prop="province" label="省份" width="120">
+          </el-table-column>
+          <el-table-column prop="city" label="市区" width="120">
+          </el-table-column>
+          <el-table-column prop="address" label="地址" width="300">
+          </el-table-column>
+          <el-table-column prop="zip" label="邮编" width="120">
+          </el-table-column>
+          <el-table-column fixed="right" label="操作" width="166">
+            <template slot-scope="scope">
+              <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
+              <el-button type="text" size="small">编辑</el-button>
+              <el-button type="text" size="small">
+                <span v-if="true">關閉</span>
+                <span v-else>開啟</span>
+              </el-button>
+              <el-button @click="handleClick(scope.row)" type="text" size="small">刪除</el-button>
+            </template>
+          </el-table-column>
+        </el-table>
+
+        <br>
+        <el-pagination class="t_center" background layout="prev, pager, next" :total="10">
+        </el-pagination>
+
+      </main>
+    </div>
+  </div>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.js'
+    integrity='sha512-PyKhbAWS+VlTWXjk/36s5hJmUJBxcGY/1hlxg6woHD/EONP2fawZRKmvHdTGOWPKTqk3CPSUPh7+2boIBklbvw=='
+    crossorigin='anonymous'></script>
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  <script src="./script/main.js"></script>
+</body>
+
+</html>

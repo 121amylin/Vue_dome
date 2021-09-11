@@ -25,12 +25,91 @@ a {
   font-weight: 600;
   color: #fff;
 }
+//icon
+.gg-image {
+  display: block;
+  box-sizing: border-box;
+  position: relative;
+  width: 20px;
+  height: 16px;
+  overflow: hidden;
+  box-shadow: 0 0 0 2px;
+  border-radius: 2px;
+}
 
+.gg-image::after,
+.gg-image::before {
+  content: "";
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  border: 2px solid;
+}
+
+.gg-image::after {
+  width: 16px;
+  height: 16px;
+  transform: rotate(45deg);
+  border-radius: 3px;
+  top: 9px;
+  left: 6px;
+}
+
+.gg-image::before {
+  width: 6px;
+  height: 6px;
+  border-radius: 100%;
+  top: 2px;
+  left: 2px;
+}
+
+.gg-smile-mouth-open {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  -webkit-transform: scale(var(--ggs, 1));
+  transform: scale(var(--ggs, 1));
+  width: 20px;
+  height: 20px;
+  border: 2px solid;
+  border-radius: 100px;
+}
+
+.gg-smile-mouth-open::after,
+.gg-smile-mouth-open::before {
+  content: "";
+  display: block;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  position: absolute;
+  left: 4px;
+}
+
+.gg-smile-mouth-open::before {
+  background: currentColor;
+  -webkit-box-shadow: 6px 0 0;
+  box-shadow: 6px 0 0;
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  top: 5px;
+}
+
+.gg-smile-mouth-open::after {
+  width: 8px;
+  height: 4px;
+  border-radius: 150px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border: 2px solid;
+  top: 9px;
+}
 // var
-$main_color: #0275D8;
-$sec_color: #BEE1FF;
-$three_color: #F5A623;
-$gray_color: #9B9B9B;
+$main_color: #0275d8;
+$sec_color: #bee1ff;
+$three_color: #f5a623;
+$gray_color: #9b9b9b;
 
 //common
 .flex {
@@ -42,12 +121,127 @@ $gray_color: #9B9B9B;
 #app {
   flex-direction: column;
   min-height: 100vh;
-  padding: 60px 0;
 
   .container {
     width: 100%;
     max-width: 600px;
     margin: auto;
     padding: 0 20px;
+  }
+}
+#app {
+  .container {
+    border-top: 4px solid $main_color;
+  }
+}
+.time_line {
+  position: relative;
+  align-items: center;
+  justify-content: space-between;
+  margin: 40px 120px;
+  .line {
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: $sec_color;
+    bottom: 5px;
+  }
+  .full {
+    width: 25%;
+    background-color: $main_color;
+  }
+  .time_dot {
+    position: relative;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #fff;
+    box-shadow: 0 0 0 3px $sec_color;
+    z-index: 1;
+  }
+  .finish {
+    width: 6px;
+    height: 6px;
+    background-color: $main_color;
+    box-shadow: 0 0 0 3px #fff, 0 0 0 6px $main_color;
+  }
+}
+.des_text {
+  text-align: center;
+  .tit {
+    font-size: 4.8rem;
+    line-height: 1.75;
+  }
+  .sec_tit {
+    font-size: 2.4rem;
+    line-height: 1.5;
+  }
+}
+.form {
+  .form_row {
+    justify-content: space-between;
+  }
+  // .multi_col{
+  // }
+  .form_item {
+    width: 100%;
+    padding: 10px 0;
+    h3 {
+      font-size: 1.8rem;
+      line-height: 1.5;
+      margin-bottom: 8px;
+    }
+    select,
+    option,
+    input {
+      width: 100%;
+      padding: 12px;
+      font-size: 1.7rem;
+    }
+    button {
+      width: 100%;
+      padding: 16px 12px;
+      font-size: 1.7rem;
+      background-color: $main_color;
+      box-shadow: none;
+      border: none;
+      color: #fff;
+      font-weight: 700;
+    }
+  }
+  select + select,
+  .form_item + .form_item {
+    margin-left: 20px;
+  }
+}
+.element_c {
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  border: 2px solid $gray_color;
+  input {
+    display: none;
+  }
+  i {
+    position: absolute;
+    transform: translate(-50%, -50%) scale(5);
+    top: 50%;
+    left: 50%;
+    color: $sec_color;
+  }
+}
+
+.success_pic {
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  i {
+    position: absolute;
+    transform: translate(-50%, -50%) scale(10);
+    top: 50%;
+    left: 50%;
+    color: $sec_color;
   }
 }

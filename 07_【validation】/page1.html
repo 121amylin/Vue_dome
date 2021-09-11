@@ -11,44 +11,52 @@
 
 <body>
   <div id="app">
-    <div class="time_line">
-      <div class="line"></div>
-      <div class="line full"></div>
-      <div class="time_dot"></div>
-      <div class="time_dot"></div>
-      <div class="time_dot"></div>
-      <div class="time_dot"></div>
+    <div class="warp">
+      <div class="container">
+        <div class="time_line flex">
+          <div class="line"></div>
+          <div class="line full"></div>
+          <div class="time_dot finish"></div>
+          <div class="time_dot"></div>
+          <div class="time_dot"></div>
+          <div class="time_dot"></div>
+        </div>
+        <div class="des_text">
+          <h1 class="tit">創建帳戶</h1>
+          <h2 class="sec_tit">歡迎加入我們!</h2>
+        </div>
+        <div class="form">
+          <div class="form_row">
+            <div class="form_item">
+              <h3>帳號</h3>
+              <label for=""><input type="text"></label>
+            </div>
+          </div>
+
+          <div class="form_row">
+            <div class="form_item">
+              <h3>密碼</h3>
+              <label for=""><input type="password"></label>
+            </div>
+          </div>
+
+          <div class="form_row">
+            <div class="form_item">
+              <h3>確認密碼</h3>
+              <label for=""><input type="password"></label>
+            </div>
+          </div>
+
+          <div class="form_row">
+            <div class="form_item">
+              <button>下一步</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
     </div>
-    <h1 class="tit">Update Profile Picture</h1>
-    <h2 class="sec_tit">We wanna know you more!</h2>
-    <div class="form">
-      <div class="form_row">
-        <div class="form_item">
-          <h3></h3>
-          <label for=""><input type="text"></label>
-        </div>
-      </div>
 
-      <div class="form_row">
-        <div class="form_item">
-          <h3></h3>
-          <label for=""><input type="text"></label>
-        </div>
-      </div>
-
-      <div class="form_row">
-        <div class="form_item">
-          <h3></h3>
-          <label for=""><input type="text"></label>
-        </div>
-      </div>
-
-      <div class="form_row">
-        <button></button>
-      </div>
-
-
-    </div>
   </div>
   <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.js'
     integrity='sha512-PyKhbAWS+VlTWXjk/36s5hJmUJBxcGY/1hlxg6woHD/EONP2fawZRKmvHdTGOWPKTqk3CPSUPh7+2boIBklbvw=='
