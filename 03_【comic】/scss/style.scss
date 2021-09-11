@@ -38,6 +38,8 @@ option {
 // var
 $main-color: #50ff44;
 $dark-color: #000;
+
+
 .area_tit {
   background-color: $dark-color;
   color: #fff;
@@ -52,7 +54,7 @@ $dark-color: #000;
   .container {
     text-align: center;
   }
-  h1 {
+  h1 a {
     display: inline-block;
     padding: 16px;
     font-size: 3.6rem;
@@ -141,7 +143,9 @@ $dark-color: #000;
 }
 .pic_box {
   position: relative;
-
+  .active img {
+    border: 2px solid $main-color;
+  }
   .btn {
     position: absolute;
     width: 60px;
@@ -187,12 +191,12 @@ $dark-color: #000;
 }
 .choose_pic {
   display: flex;
-  overflow: hidden;
   margin: 20px 0;
+  overflow-x: scroll;
   a {
     width: 20%;
     flex-shrink: 0;
-    padding:0 10px;
+    padding: 0 10px;
   }
 }
 //icon
@@ -259,4 +263,19 @@ $dark-color: #000;
 }
 .gg-sun::after {
   transform: rotate(45deg);
+}
+
+
+
+.darkmode {
+  &#app {
+    background-color: #393939;
+  }
+  .choose h3,
+  .gg-sun{
+    color: #fff;
+  }
+  .pic_box .btn{
+    background-color: rgba(255,255,255,.2);
+  }
 }

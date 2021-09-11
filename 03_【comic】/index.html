@@ -14,15 +14,15 @@
     <link rel="stylesheet" href="style/style.css" />
   </head>
   <body>
-    <div id="app">
+    <div id="app" :class="{darkmode:is_darkMode}">
       <header id="header">
         <div class="container">
-          <h1>Comicomic</h1>
+          <h1><router-link to="/">Comicomic</router-link></h1>
         </div>
       </header>
 
       <div class="main">
-        <router-view :pdate="comic"></router-view>
+        <router-view :pdate="comic" :props_chapter="now_chapter"   :props_darkmode="is_darkMode" @emit_change_chapter="change_chapter" @emit_change_mode="change_mode"></router-view>
       </div>
 
     </div>

@@ -20,7 +20,7 @@ const into={
       <h3 class="area_tit">All Chapters</h3>
       <ul class="list">
         <li v-for="(item,index) in pdate[0].Chapter">
-          <a href="#" @click.prevent="topage(seriesName)">Chapters {{index+1}} : {{item}}</a>
+          <a href="#" @click.prevent="topage([pdate[0].seriesName,index])">Chapters {{index+1}} : {{item}}</a>
         </li>
       </ul>
     </div>
@@ -30,8 +30,10 @@ const into={
   </div>`,
   props:["pdate"],
   methods:{
-    topage(id){
-      this.$router.push(`/pages/${id}1`)
+    topage(props){
+      let [seriesName,index]=props
+      this.$router.push(`/pages/${seriesName}`)
+      this.$emit("emit_change_chapter",index)
     }
   }
 }
@@ -41,7 +43,7 @@ const page={
         <div class="choose">
           <h3>{{pdate[0].name}}</h3>
 
-          <select v-model="now_chapter">
+          <select v-model="props_chapter">
             <option :value="i.part" v-for="i in pdate[0].chapter" :key="i.id">
               chapter{{i.part}}
             </option>
@@ -50,8 +52,8 @@ const page={
             <option :value="j" v-for="j in get_page" :key="j">page{{j}}</option>
           </select>
           <div class="btn_area">
-            <a href="#" v-if="is_darkMode" class="gg-sum"></a>
-            <a href="#" v-else class="gg-moon"></a>
+            <a href="#" v-if="props_darkmode" class="gg-sun" @click.prevent="changemode"></a>
+            <a href="#" v-else class="gg-moon"  @click.prevent="changemode"></a>
           </div>
         </div>
         <div class="picture_area">
@@ -59,39 +61,68 @@ const page={
             <div class="pic">
               <img :src="get_show_pic" alt="" />
             </div>
-            <a href="#" class="btn prev_btn"></a>
-            <a href="#" class="btn next_btn"></a>
+            <a href="#" class="btn prev_btn" @click.prevent="changepage('-1')"></a>
+            <a href="#" class="btn next_btn" @click.prevent="changepage('+1')"></a>
           </div>
-          <div class="choose_pic pic_box">
-            <a href="#" v-for="n in get_page">
+          <div class="choose_pic pic_box" ref="pic_box">
+            <a @click.prevent="changepage(n)" v-for="n in get_page" :class="[n==now_page?'active':'']" ref="pic">
               <img :src="get_choose_pic(n)" alt="" />
             </a>
-            <a href="#" class="btn prev_btn"></a>
-            <a href="#" class="btn next_btn"></a>
           </div>
         </div>
       </div>
     </div>
   `,
-  props:["pdate"],
+  props:["pdate","props_chapter" ,"props_darkmode"],
   data() {
     return {
-      now_chapter:1,
       now_page:1,
-      is_darkMode:false,
     }
   },
   computed:{
     get_page(){
-      return this.pdate[0].chapter[this.now_chapter-1].page
+      return this.pdate[0].chapter[this.props_chapter-1].page
     },
     get_show_pic(){
-      return `images/${this.pdate[0].seriesName}_${this.now_chapter}-${this.now_page}.png`
+      return `images/${this.pdate[0].seriesName}_${this.props_chapter}-${this.now_page}.png`
+    },
+    get_max_page(){
+        return this.pdate[0].chapter[this.props_chapter-1].page
+    },
+    get_pic_size(){
+      return this.$refs.pic.length
     }
   },
   methods:{
     get_choose_pic(n){
-      return `images/${this.pdate[0].seriesName}_${this.now_chapter}-${n}.png`
+      return `images/${this.pdate[0].seriesName}_${this.props_chapter}-${n}.png`
+    },
+    changepage(num){
+      if(num=="+1"){
+        if(this.now_page>=this.get_max_page){
+          this.now_page=1
+        }else{
+          this.now_page++
+        }
+      }else if(num=="-1"){
+        if(1>=this.now_page){
+          this.now_page=this.get_max_page
+        }else{
+          this.now_page--
+        }
+      }else{
+        this.now_page=num*1
+      }
+      let scroll_box=this.$refs.pic_box
+      let scroll_l=(scroll_box.scrollWidth-scroll_box.offsetWidth)/this.get_page
+      if(this.now_page==1){
+        scroll_box.scrollLeft=0
+      }else{
+        scroll_box.scrollLeft=scroll_l*this.now_page
+      }
+    },
+    changemode(){
+      this.$emit('emit_change_mode')
     }
   }
 }
@@ -121,7 +152,6 @@ new Vue({
   data() {
     return {
       now_chapter:1,
-      now_page:1,
       is_darkMode:false,
       comic:[
         {
@@ -155,7 +185,13 @@ new Vue({
     page
   },
   methods:{
-
+    change_chapter(num){
+      console.log(num)
+      this.now_chapter=num+1
+    },
+    change_mode(){
+      this.is_darkMode=!this.is_darkMode
+    }
   },
   computed:{
     get_page(){

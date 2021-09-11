@@ -64,7 +64,7 @@ option {
   text-align: center;
 }
 
-#header h1 {
+#header h1 a {
   display: inline-block;
   padding: 16px;
   font-size: 3.6rem;
@@ -177,6 +177,10 @@ option {
   position: relative;
 }
 
+.pic_box .active img {
+  border: 2px solid #50ff44;
+}
+
 .pic_box .btn {
   position: absolute;
   width: 60px;
@@ -231,8 +235,8 @@ option {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  overflow: hidden;
   margin: 20px 0;
+  overflow-x: scroll;
 }
 
 .choose_pic a {
@@ -312,4 +316,17 @@ option {
 .gg-sun::after {
   -webkit-transform: rotate(45deg);
           transform: rotate(45deg);
+}
+
+.darkmode#app {
+  background-color: #393939;
+}
+
+.darkmode .choose h3,
+.darkmode .gg-sun {
+  color: #fff;
+}
+
+.darkmode .pic_box .btn {
+  background-color: rgba(255, 255, 255, 0.2);
 }
