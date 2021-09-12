@@ -1,7 +1,9 @@
 <template>
-  <div class="pic_list_area">
-    <ul class="list">
-      <li class="item" v-for="item in props_list_data" :key="item.UID">
+  <div class="pic_list_area" v-if="get_data">
+    <!-- {{ get_now_city }}
+    {{ filter_list }} -->
+    <!-- <ul class="list">
+      <li class="item" v-for="item in filter_list" :key="item.UID">
         <a class="flex" href="#" @click.prevent="tointo(item.UID)">
           <div class="pic">
             <img v-if="item.imageURL" :src="item.imageURL" alt="" />
@@ -15,9 +17,6 @@
               </p>
             </div>
             <h3 class="des"><span>主辦單位：</span>{{ item.showUnit }}</h3>
-            <h3 class="des">
-              <a :href="item.webSales">活動連結<i class="gg-link"></i></a>
-            </h3>
             <div class="into_box">
               <div class="into_item">
                 <i class="gg-pin"></i>活動位置 : {{ item.showInfo[0].location }}
@@ -34,15 +33,47 @@
           </div>
         </a>
       </li>
-    </ul>
+    </ul> -->
   </div>
 </template>
 <script>
 export default {
-  props: ['props_list_data'],
+  computed: {
+    get_data () {
+      return this.$store.state.db
+    },
+    get_now_city () {
+      return this.$store.state.now_city
+    },
+    get_first_data () {
+      return this.$store.state.first_data
+    },
+
+    filter_list () {
+      return this.get_data.filter(item => {
+        return item.showInfo[0].location.indexOf(this.get_now_city)
+      })[0]
+      // const arr = []
+
+      // if (this.get_now_city === '全部') {
+      //   for (let i = this.get_first_data; i < 10; i++) {
+      //     arr.push(this.get_data[i])
+      //   }
+      // } else {
+      //   const tempArr = this.get_data.filter(item => {
+      //     return item.showInfo[0].location.indexOf(this.get_now_city)
+      //   })
+      //   for (let i = this.get_first_data; i < 10; i++) {
+      //     arr.push(tempArr[i])
+      //   }
+      // }
+
+      // return arr
+    }
+  },
   methods: {
     trimIInto (str) {
-      return str.slice(1, 100) + '...'
+      return str.slice(1, 50) + '...'
     },
     tointo (id) {
       this.$router.push(`/show/${id}`)
@@ -89,7 +120,6 @@ export default {
       font-size: 2.4rem;
       color: $main-color;
       line-height: 1.25;
-
     }
     .into_des {
       margin-bottom: 10px;

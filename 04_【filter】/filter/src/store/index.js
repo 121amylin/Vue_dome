@@ -9,12 +9,20 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    db: null
+    db: null,
+    now_city: '台中市',
+    first_data: 0
   },
   mutations: {
     GET_DB (state, date) {
       state.db = date
+    },
+    CHANGE_CITY (state, date) {
+      state.now_city = date
     }
+  },
+  getters: {
+
   },
   actions: {
     get_API (store) {

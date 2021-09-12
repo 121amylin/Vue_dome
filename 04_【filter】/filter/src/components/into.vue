@@ -1,14 +1,12 @@
 <template>
-  <div class="into" v-if='get_data'>
+  <div class="into" v-if="get_data">
     <div class="pic">
       <img v-if="get_show_data.imageURL" :src="get_show_data.imageURL" alt="" />
     </div>
     <div class="into">
       <h2 class="title">{{ get_show_data.title }}</h2>
       <h3 class="des"><span>主辦單位：</span>{{ get_show_data.showUnit }}</h3>
-      <h3 class="des">
-        <a :href="get_show_data.webSales">活動連結<i class="gg-link"></i></a>
-      </h3>
+
       <div class="into_box">
         <div class="into_item">
           <i class="gg-pin"></i>{{ get_show_data.showInfo[0].location }}
@@ -28,6 +26,10 @@
           {{ get_show_data.descriptionFilterHtml }}
         </p>
       </div>
+      <h3 class="des">
+        <a :href="get_show_data.sourceWebPromote
+" target="_blank">活動連結<i class="gg-link"></i></a>
+      </h3>
     </div>
   </div>
 </template>
@@ -99,6 +101,9 @@ export default {
       vertical-align: middle;
       margin-right: 8px;
     }
+  }
+  .into_des {
+    margin-bottom: 20px;
   }
 }
 .back {

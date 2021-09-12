@@ -9,9 +9,9 @@
 
     <div class="item">
       <h3>地點</h3>
-      <select>
+      <select v-model="get_now_city">
         <option value="請選擇地點" disabled>請選擇地點</option>
-        <option value="11">11</option>
+        <option v-for="n in city" :value="n" :key="n">{{ n }}</option>
       </select>
     </div>
 
@@ -31,22 +31,51 @@
         </label>
       </div>
     </div>
-<!--
-    <div class="item">
-      <h3>地點</h3>
-      <div class="place_item">
-        <label for="from"
-          ><input
-            class="checkbox"
-            type="checkbox"
-            name="all"
-            id="all"
-          />全部</label
-        >
-      </div>
-    </div> -->
   </aside>
 </template>
+<script>
+export default {
+  data () {
+    return {
+      city: [
+        '宜蘭縣',
+        '基隆市',
+        '台北市',
+        '新北市',
+        '桃園縣',
+        '新竹縣',
+        '新竹市',
+        '苗栗縣',
+        '台中市',
+        '南投縣',
+        '彰化縣',
+        '雲林縣',
+        '嘉義市',
+        '嘉義縣',
+        '台南市',
+        '高雄市',
+        '屏東縣',
+        '台東縣',
+        '花蓮縣',
+        '澎湖縣',
+        '金門縣',
+        '連江縣'
+      ]
+    }
+  },
+  computed: {
+    get_now_city: {
+      get: function () {
+        return this.$store.state.now_city
+      },
+      set: function (newValue) {
+        this.$store.commit('CHANGE_CITY', newValue)
+      }
+    }
+  },
+  methods: {}
+}
+</script>
 <style lang="scss">
 @import '../scss/base';
 #aside {

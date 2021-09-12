@@ -1,9 +1,6 @@
 <template>
   <div id="app" v-if="isloadend">
-    <!-- <div id="nav">
-      <router-link to="/">list</router-link> |
-      <router-link to="/show/123">more</router-link>
-    </div> -->
+
     <myheader></myheader>
     <div class="main">
       <div class="container flex">
@@ -24,6 +21,7 @@ export default {
       isloadend: false
     }
   },
+  methods: {},
   created () {
     this.$store.dispatch('get_API')
   },
