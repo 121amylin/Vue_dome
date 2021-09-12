@@ -1,9 +1,7 @@
 <template>
   <div class="pic_list_area" v-if="get_data">
-    <!-- {{ get_now_city }}
-    {{ filter_list }} -->
-    <!-- <ul class="list">
-      <li class="item" v-for="item in filter_list" :key="item.UID">
+    <ul class="list">
+      <li class="item" v-for="item in get_list_show" :key="item.UID">
         <a class="flex" href="#" @click.prevent="tointo(item.UID)">
           <div class="pic">
             <img v-if="item.imageURL" :src="item.imageURL" alt="" />
@@ -33,7 +31,7 @@
           </div>
         </a>
       </li>
-    </ul> -->
+    </ul>
   </div>
 </template>
 <script>
@@ -51,24 +49,11 @@ export default {
 
     filter_list () {
       return this.get_data.filter(item => {
-        return item.showInfo[0].location.indexOf(this.get_now_city)
-      })[0]
-      // const arr = []
-
-      // if (this.get_now_city === '全部') {
-      //   for (let i = this.get_first_data; i < 10; i++) {
-      //     arr.push(this.get_data[i])
-      //   }
-      // } else {
-      //   const tempArr = this.get_data.filter(item => {
-      //     return item.showInfo[0].location.indexOf(this.get_now_city)
-      //   })
-      //   for (let i = this.get_first_data; i < 10; i++) {
-      //     arr.push(tempArr[i])
-      //   }
-      // }
-
-      // return arr
+        return item.showInfo[0].location.indexOf(this.get_now_city) > -1
+      })
+    },
+    get_list_show () {
+      return this.filter_list.slice(0, 10)
     }
   },
   methods: {

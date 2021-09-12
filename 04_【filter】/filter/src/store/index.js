@@ -10,7 +10,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     db: null,
-    now_city: '台中市',
+    now_city: '臺中市',
     first_data: 0
   },
   mutations: {
