@@ -86,7 +86,8 @@ export default new Vuex.Store({
                   webSales: item.webSales,
                   imageUrl: item.imageUrl,
                   startDate: item.startDate,
-                  endDate: item.endDate
+                  endDate: item.endDate,
+                  category: item.category
                 })
               })
             })
