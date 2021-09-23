@@ -1,92 +1,172 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style/style.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <link rel="stylesheet" href="style/style.css">
-</head>
-
-<body>
-  <div id="app">
-    <div class="container flex">
-      <aside class="aside">
-        <div class="timer_panel flex">
-          <div class="item flex">
-            <div class="box box_top"></div>
-            <div class="box box_bottom"></div>
-            <div class="circle circle_left"></div>
-            <div class="circle circle_right"></div>
-            <div class="num">00</div>
-          </div>
-          <div class="item flex">
-            <div class="box box_top"></div>
-            <div class="box box_bottom"></div>
-            <div class="circle circle_left"></div>
-            <div class="circle circle_right"></div>
-            <div class="num">26</div>
-          </div>
-          <div class="item flex">
-            <div class="box box_top"></div>
-            <div class="box box_bottom"></div>
-            <div class="circle circle_left"></div>
-            <div class="circle circle_right"></div>
-            <div class="num">40</div>
-          </div>
-        </div>
-        <div class="add_panel">
-          <div class="choose_time flex">
-            <div class="choose_item">
-              <input type="radio" id="m60" value="m60" v-model="setTime">
-              <label for="m60">1小時</label>
+  <body>
+    <div id="app">
+      <div class="container flex">
+        <aside class="aside">
+          <div class="timer_panel flex" :class="timerStyle">
+            <div class="item flex">
+              <div class="box box_top"></div>
+              <div class="box box_bottom"></div>
+              <div class="circle circle_left"></div>
+              <div class="circle circle_right"></div>
+              <div class="num">{{getHour}}</div>
             </div>
-            <div class="choose_item">
-              <input type="radio" id="m30" value="m30" v-model="setTime">
-              <label for="m30">30分鐘</label>
+            <div class="item flex">
+              <div class="box box_top"></div>
+              <div class="box box_bottom"></div>
+              <div class="circle circle_left"></div>
+              <div class="circle circle_right"></div>
+              <div class="num">{{getMin}}</div>
             </div>
-            <div class="choose_item">
-              <input type="radio" id="m15" value="m15" v-model="setTime">
-              <label for="m15">15分鐘</label>
+            <div class="item flex">
+              <div class="box box_top"></div>
+              <div class="box box_bottom"></div>
+              <div class="circle circle_left"></div>
+              <div class="circle circle_right"></div>
+              <div class="num">{{getSec}}</div>
             </div>
           </div>
-          <input class="addinput" type="text" name="" id="" placeholder="請輸入代辦事項">
-          <button class="submit">送出</button>
-        </div>
-      </aside>
-      <div class="main">
-        <div class="rwd_table">
-          <table class="table" cellpadding="0">
-            <thead>
-              <tr>
-                <th>執行狀態</th>
-                <th>工作事項</th>
-                <th>刪除任務</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                  <p><i class="inline_block ib_icon gg-radio-check"></i> 未完成</p>
-                  <p><i class="inline_block ib_icon gg-radio-checked"></i> 完成</p>
-                  <p><i class="inline_block ib_icon gg-sand-clock"></i> 進行中</p>
-
-                </td>
-                <td>text</td>
-                <td><i class="gg-trash"></i></td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="op_box">
+            <button class="btn" @click="start">開始</button>
+            <button class="btn" @click="pause">暫停</button>
+            <button class="btn" @click="stop">完成</button>
+          </div>
+          <div class="add_panel">
+            <div class="choose_time flex">
+              <div class="choose_item">
+                <label for="min15">
+                  <input
+                    type="radio"
+                    name="time"
+                    id="min15"
+                    v-model="pre_time"
+                    value="900"
+                  />15分鐘
+                </label>
+              </div>
+              <div class="choose_item">
+                <label for="min30">
+                  <input
+                    type="radio"
+                    name="time"
+                    id="min30"
+                    v-model="pre_time"
+                    value="1800"
+                  />30分鐘
+                </label>
+              </div>
+              <div class="choose_item">
+                <label for="min60">
+                  <input
+                    type="radio"
+                    name="time"
+                    id="min60"
+                    v-model="pre_time"
+                    value="3600"
+                  />1小時
+                </label>
+              </div>
+              <div class="choose_item">
+                <label for="min120">
+                  <input
+                    type="radio"
+                    name="time"
+                    id="min120"
+                    v-model="pre_time"
+                    value="7200"
+                  />2小時
+                </label>
+              </div>
+            </div>
+            <input
+              class="addinput"
+              type="text"
+              placeholder="請輸入代辦事項"
+              v-model="addText"
+            />
+            <button class="submit" @click="add">送出</button>
+          </div>
+        </aside>
+        <div class="main">
+          <div class="rwd_table">
+            <table class="table" cellpadding="0">
+              <thead>
+                <tr>
+                  <th>編號</th>
+                  <th>事項</th>
+                  <th>是否完成</th>
+                  <th>預計完成時間</th>
+                  <th>實際完成時間</th>
+                  <th>是否超時</th>
+                  <th>開始時間</th>
+                  <th>完成時間</th>
+                  <th>打斷次數</th>
+                  <th>打斷時間</th>
+                  <th>其他操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="(item,index) in list">
+                  <td>{{index+1}}</td>
+                  <td>{{item.title}}</td>
+                  <td>{{item.iscompele}}</td>
+                  <td>{{item.preTimer}}</td>
+                  <td>{{item.uesTimer}}</td>
+                  <td>
+                    <span v-if="item.uesTimer==='--'">--</span>
+                    <span v-else>{{item.uesTimer*1>0?"false":"true"}}</span>
+                  </td>
+                  <td>{{item.start_time}}</td>
+                  <td>{{item.end_time}}</td>
+                  <td>{{item.break_count}}</td>
+                  <td>
+                    <ul>
+                      <li v-for="n in item.break">{{n}}</li>
+                    </ul>
+                  </td>
+                  <td>
+                    <span v-if="!item.iscompele">
+                      <button
+                        class="btn"
+                        v-if="item.id!==now_id"
+                        @click="pre_start({time:item.preTimer,id:item.id})"
+                      >
+                        計時
+                      </button>
+                      <button
+                        class="btn"
+                        v-else="!item.iscompele"
+                        @click="reset_pre_start(item.id)"
+                      >
+                        重來
+                      </button>
+                    </span>
+                    <button class="btn" @click="deleteItem(item.id)">
+                      刪除
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.js'
-    integrity='sha512-PyKhbAWS+VlTWXjk/36s5hJmUJBxcGY/1hlxg6woHD/EONP2fawZRKmvHdTGOWPKTqk3CPSUPh7+2boIBklbvw=='
-    crossorigin='anonymous'></script>
-  <script src="script/main.js"></script>
-</body>
-
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.js"
+      integrity="sha512-PyKhbAWS+VlTWXjk/36s5hJmUJBxcGY/1hlxg6woHD/EONP2fawZRKmvHdTGOWPKTqk3CPSUPh7+2boIBklbvw=="
+      crossorigin="anonymous"
+    ></script>
+    <script src="script/main.js"></script>
+  </body>
 </html>

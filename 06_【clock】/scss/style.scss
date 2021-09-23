@@ -55,13 +55,24 @@ button {
   vertical-align: -3px;
   margin-right: 6px;
 }
-// body {
-// }
+
+.safe {
+  color: rgb(0, 89, 255);
+}
+
+.wran {
+  color: rgb(197, 0, 0);
+}
+
+.remind {
+  color: rgb(255, 157, 0);
+}
 #app {
   min-height: 100vh;
   padding: 60px 0;
   background-color: $bg_color;
-  background-image: url(../images/bg-stars.svg), url(../images/pattern-hills.svg);
+  background-image: url(../images/bg-stars.svg),
+    url(../images/pattern-hills.svg);
   background-position: center, center bottom;
   background-repeat: no-repeat;
   background-size: cover, contain;
@@ -75,24 +86,49 @@ button {
   }
 }
 .aside {
-  width: calc(40% - 30px);
-  @media (max-width: 991px) {
-    width: 100%;
-  }
+  // width: calc(40% - 30px);
+  width: 100%;
+  // @media (max-width: 991px) {
+  //   width: 100%;
+  // }
 }
 .main {
-  width: 60%;
-  @media (max-width: 991px) {
-    width: 100%;
-  }
+  // width: 60%;
+  width: 100%;
+  // @media (max-width: 991px) {
+  //   width: 100%;
+  // }
 }
 .rwd_table {
   @media (max-width: 600px) {
     overflow-x: scroll;
   }
 }
+.op_box {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 40px;
+  .btn {
+    width: calc(33.3% - 20px);
+  }
+}
+.btn {
+  padding: 8px 16px;
+  border-radius: 6px;
+  background-color: $text_color;
+  border: navajowhite;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  &:hover {
+    background-color: darken($text_color, 6%);
+  }
+}
+.rwd_table {
+  overflow-x: scroll;
+}
 .table {
   width: 100%;
+  min-width: 1600px;
   border-collapse: collapse;
   @media (max-width: 600px) {
     width: 680px;
@@ -103,18 +139,22 @@ button {
     }
   }
   th {
-    &:nth-child(1),
-    &:nth-child(3) {
-      width: 20%;
-    }
+    // &:nth-child(1),
+    // &:nth-child(3) {
+    //   width: 20%;
+    // }
     &:nth-child(2) {
-      width: 60%;
+      width: 200px;
     }
   }
   td:nth-child(3) i.gg-trash {
     margin: auto;
   }
-  th,
+  th {
+    color: rgb(255, 235, 122);
+    font-size: 1.8rem;
+    padding: 12px;
+  }
   td {
     color: #fff;
     font-size: 1.8rem;
@@ -123,6 +163,12 @@ button {
   th + th,
   td + td {
     border-left: 1px solid rgba(255, 255, 255, 0.3);
+  }
+  .btn {
+    margin: 4px 0;
+  }
+  ul {
+    list-style: none;
   }
 }
 
@@ -162,7 +208,7 @@ button {
       background-color: $bg_color;
       position: absolute;
       transform: translateY(-50%);
-      top:calc(50% - 6px) ;
+      top: calc(50% - 6px);
     }
     .circle_left {
       left: 4px;
@@ -176,12 +222,12 @@ button {
         right: 14px;
       }
     }
-    .num{
+    .num {
       position: absolute;
       font-size: 6rem;
       font-weight: 900;
       color: $text_color;
-      transform: translate(-50%,-50%);
+      transform: translate(-50%, -50%);
       top: 50%;
       left: 50%;
     }
@@ -191,6 +237,7 @@ button {
   background-color: $main_color;
   border-radius: 15px;
   padding: 20px 30px 30px 30px;
+  margin-bottom: 50px;
   @media (max-width: 991px) {
     margin-bottom: 40px;
   }
@@ -220,7 +267,10 @@ button {
   justify-content: space-between;
   flex-wrap: wrap;
   .choose_item {
-    width: 33.3%;
+    width: 25%;
     padding: 8px;
+    input{
+      margin-right: 6px;
+    }
   }
 }
