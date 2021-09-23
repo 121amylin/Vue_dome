@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      tr + tr td {
+        border-top: 1px solid #999;
+        padding: 10px;
+      }
+
+      .safe {
+        color: rgb(0, 89, 255);
+      }
+
+      .wran {
+        color: rgb(197, 0, 0);
+      }
+
+      .remind {
+        color: rgb(255, 157, 0);
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="app">
+      <label for="min15">
+        <input
+          type="radio"
+          name="time"
+          id="min15"
+          v-model="pre_time"
+          value="900"
+        />15分鐘
+      </label>
+      <label for="min30">
+        <input
+          type="radio"
+          name="time"
+          id="min30"
+          v-model="pre_time"
+          value="1800"
+        />30分鐘
+      </label>
+      <label for="min60">
+        <input
+          type="radio"
+          name="time"
+          id="min60"
+          v-model="pre_time"
+          value="3600"
+        />1小時
+      </label>
+      <label for="min120">
+        <input
+          type="radio"
+          name="time"
+          id="min120"
+          v-model="pre_time"
+          value="7200"
+        />2小時
+      </label>
+
+      <label for="sec15">
+        <input
+          type="radio"
+          name="time"
+          id="sec15"
+          v-model="pre_time"
+          value="15"
+        />15秒鐘
+      </label>
+      <label for="sec5">
+        <input
+          type="radio"
+          name="time"
+          id="sec5"
+          v-model="pre_time"
+          value="5"
+        />5秒鐘
+      </label>
+
+      <input type="text" placeholder="代辦事項" v-model="addText" />
+      <button @click="add">新增</button>
+
+      <hr />
+      <div class="timer_area">
+        <p :class="timerStyle">
+          <span>{{getHour}}</span> : <span>{{getMin}}</span> :
+          <span>{{getSec}}</span>
+        </p>
+        <button @click="start">開始</button>
+        <button @click="pause">暫停</button>
+        <button @click="stop">完成</button>
+      </div>
+      <hr />
+      <table>
+        <tr>
+          <th>編號</th>
+          <th>事項</th>
+          <th>是否完成</th>
+          <th>預計完成時間</th>
+          <th>實際完成時間</th>
+          <th>是否超時</th>
+          <th>開始時間</th>
+          <th>完成時間</th>
+          <th>打斷次數</th>
+          <th>打斷時間</th>
+          <th>其他操作</th>
+        </tr>
+        <tr v-for="(item,index) in list">
+          <td>{{index+1}}</td>
+          <td>{{item.title}}</td>
+          <td>{{item.iscompele}}</td>
+          <td>{{item.preTimer}}</td>
+          <td>{{item.uesTimer}}</td>
+          <td>
+            <span v-if="item.uesTimer==='--'">--</span>
+            <span v-else>{{item.uesTimer*1>0?"false":"true"}}</span>
+          </td>
+          <td>{{item.start_time}}</td>
+          <td>{{item.end_time}}</td>
+          <td>{{item.break_count}}</td>
+          <td>
+            <ul>
+              <li v-for="n in item.break">{{n}}</li>
+            </ul>
+          </td>
+          <td>
+            <span v-if="!item.iscompele">
+              <button
+                v-if="item.id!==now_id"
+                @click="pre_start({time:item.preTimer,id:item.id})"
+              >
+                計時
+              </button>
+              <button
+                v-else="!item.iscompele"
+                @click="reset_pre_start(item.id)"
+              >
+                重來
+              </button>
+            </span>
+            <button @click="deleteItem(item.id)">刪除</button>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.js"
+      integrity="sha512-PyKhbAWS+VlTWXjk/36s5hJmUJBxcGY/1hlxg6woHD/EONP2fawZRKmvHdTGOWPKTqk3CPSUPh7+2boIBklbvw=="
+      crossorigin="anonymous"
+    ></script>
+
+    <script>
+      new Vue({
+        el: "#app",
+        data() {
+          return {
+            list: null,
+            addText: "",
+            pre_time: "900",
+            time_now: "",
+            is_timing: false,
+            timer: null,
+            now_id: null,
+          };
+        },
+        computed: {
+          getHour() {
+            return this.time_now
+              ? this.time_now > 3600
+                ? Math.floor((this.time_now / 3600) % 60)
+                : "00"
+              : "00";
+          },
+          getMin() {
+            return this.time_now
+              ? this.time_now > 60
+                ? Math.floor((this.time_now / 60) % 60)
+                : "00"
+              : "00";
+          },
+          getSec() {
+            return this.time_now ? this.time_now % 60 : "00";
+          },
+          timerStyle() {
+            return this.time_now > 10
+              ? "safe"
+              : this.time_now >= 0
+              ? "remind"
+              : "wran";
+          },
+        },
+        methods: {
+          setDB() {
+            localStorage.setItem("mylist", JSON.stringify(this.list));
+          },
+          add() {
+            if (!this.addText.trim()) {
+              alert("請輸入文字內容");
+              this.addText = "";
+              return;
+            }
+            let addObj = {
+              id: new Date().getTime(),
+              title: this.addText,
+              iscompele: false,
+              uesTimer: "--",
+              preTimer: this.pre_time,
+              start_time: "--",
+              end_time: "--",
+              break_count: 0,
+              break: [],
+            };
+            this.list.push(addObj);
+            this.setDB();
+            this.addText = "";
+          },
+          pre_start(time) {
+            this.time_now = time.time;
+            this.now_id = time.id;
+          },
+          pause() {
+            clearInterval(this.timer);
+            this.timer = null;
+            if (this.is_timing) {
+              this.list.forEach((item) => {
+                if (item.id === this.now_id) {
+                  item.break_count++;
+                  item.break.push(new Date().toLocaleString().slice(0, -3));
+                }
+              });
+            }
+            this.setDB();
+          },
+          start() {
+            if (!this.now_id) return;
+            if (!this.is_timing) {
+              this.list.forEach((item) => {
+                if (item.id === this.now_id) {
+                  item.start_time = new Date().toLocaleString().slice(0, -3);
+                }
+              });
+            }
+            this.is_timing = true;
+            this.timer = setInterval(() => {
+              --this.time_now;
+            }, 1000);
+          },
+          stop() {
+            this.is_timing = false;
+            this.pause();
+            this.list.forEach((item) => {
+              if (item.id === this.now_id) {
+                item.iscompele = true;
+                item.uesTimer = this.time_now;
+                item.end_time = new Date().toLocaleString().slice(0, -3);
+              }
+            });
+            this.setDB();
+            this.now_id = null;
+            this.time_now = "";
+          },
+          deleteItem(id) {
+            let point = 0;
+            this.list.forEach((item) => {
+              if (item.id === id) {
+                this.list.splice(point, 1);
+              } else {
+                point++;
+              }
+            });
+            this.setDB();
+          },
+          reset_pre_start(id) {
+            clearInterval(this.timer);
+            this.list.forEach((item) => {
+              if (item.id === id) {
+                (item.uesTimer = "--"),
+                  (item.start_time = "--"),
+                  (item.end_time = "--"),
+                  (item.break_count = 0),
+                  (item.break = []);
+              }
+            });
+            this.now_id = null;
+            this.time_now = "";
+            this.is_timing = false;
+            this.setDB();
+          },
+        },
+        mounted() {
+          this.list = JSON.parse(localStorage.getItem("mylist")) || [];
+        },
+      });
+    </script>
+  </body>
+</html>
