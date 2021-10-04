@@ -167,7 +167,8 @@ new Vue({
     }
   },
   mounted() {
-    fetch('https://restcountries.eu/rest/v2/all').then((res) => {
+    // https://restcountries.com/#api-endpoints-v2
+    fetch('https://restcountries.com/v2/all').then((res) => {
       return res.json()
     }).then(resulte => {
       let tempclass = []
@@ -201,3 +202,4 @@ new Vue({
 
   }
 })
+
