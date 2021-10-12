@@ -1,0 +1,48 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+b {
+  font-weight: 900;
+  flex-shrink: 0;
+  margin-right: 6px;
+}
+p {
+  display: flex;
+  margin: 12px 0;
+  line-height: 1.75;
+}
+input,
+select {
+  padding: 4px 8px;
+  vertical-align: 2px;
+}
+#app {
+  padding: 30px;
+}
+ul {
+  list-style: none;
+  padding-left: 0;
+  li {
+    padding: 32px 28px;
+    + li {
+      border-top: 1px solid #999;
+    }
+  }
+}
+.aside {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 30px;
+  background-color: #eee;
+  .item {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    background-color: #fff;
+    margin: 4px;
+    label {
+      margin-right: 4px;
+    }
+  }
+}
