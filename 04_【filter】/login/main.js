@@ -1,5 +1,6 @@
 const list = {
   template: `<div class="list_page">
+  <div v-if="getStore">
     <aside class="aside">
       <div class="item">
         <label for="city">請選擇城市</label>
@@ -49,11 +50,12 @@ const list = {
           <a :href="item.webSales" target="_blank">連結網址</a>
           <br>
           <br>
-          <a href="#" @click="todetail(item.UID)">查看活動細節</a>
+          <a href="javascript:;" @click="todetail(item.UID)">查看活動細節</a>
         </li>
       </ul>
     </main>
-
+</div>
+<div v-else>loading</div>
 
   </div>`,
   data() {
@@ -197,43 +199,53 @@ const list = {
 
 
 const detail = {
-  template: `<div class="detail_page">
-
-  <h3>{{getShowDatw.title}}</h3>
-  <p>
-    <b>主辦單位 : </b>{{getShowDatw.showUnit}}
-  </p>
-  <p>
-    <b>活動地址 : </b>{{getShowDatw.showInfo[0].location}}
-  </p>
-  <p>
-    <b>活動時間 : </b>{{getShowDatw.showInfo[0].time}} ~ {{getShowDatw.showInfo[0].endTime}}
-  </p>
-  <p>
-    <b>活動介紹 : </b>{{getShowDatw.descriptionFilterHtml}}
-  </p>
-  <a :href="getShowDatw.webSales" target="_blank">連結網址</a>
-  <br>
-  <br>
-  <button @click="goback">回上一頁</button>
-  
-  
+  template: `
+  <div class="detail_page">
+    <div  v-if="getShowDatw">
+      <h3>{{getShowDatw.title}}</h3>
+      <p>
+        <b>主辦單位 : </b>{{getShowDatw.showUnit}}
+      </p>
+      <p>
+        <b>活動地址 : </b>{{getShowDatw.showInfo[0].location}}
+      </p>
+      <p>
+        <b>活動時間 : </b>{{getShowDatw.showInfo[0].time}} ~ {{getShowDatw.showInfo[0].endTime}}
+      </p>
+      <p>
+        <b>活動介紹 : </b>{{getShowDatw.descriptionFilterHtml}}
+      </p>
+      <a :href="getShowDatw.webSales" target="_blank">連結網址</a>
+      <br>
+      <br>
+      <button @click="goback">回上一頁</button>
+    </div>
+    <div v-else>loading</div>
   </div>`,
   computed: {
     getUID() {
       return this.$route.params.id
     },
+    getStore() {
+      return this.$store.state.apiDate
+    },
     getShowDatw() {
-      const indexNum = this.$store.state.apiDate.findIndex(item => {
-        return item.UID === this.getUID
-      })
-      return this.$store.state.apiDate[indexNum]
+      if(this.getStore){
+        const indexNum = this.getStore.findIndex(item => {
+            return item.UID === this.getUID
+          })
+          return this.getStore[indexNum]
+      }
+
     }
   },
   methods: {
     goback() {
-      this.$router.go(-2)
+      this.$router.go(-1)
     }
+  },
+  mounted() {
+    this.$store.dispatch('sendAPI')
   }
 }
 
